@@ -1,16 +1,9 @@
 <template>
   <MasterPage>
-  <!-- header -->
-  <div class="bg-slate-800 h-16 fixed left-1/6 right-0 border-b flex items-center px-4">
-    <input type="text" 
-      class="border border-slate-500 rounded-l-full h-12 w-2/3 text-slate-400 p-5 focus:ring-0" placeholder="Search for product...">
-    <button class="bg-orange-500 text-white h-12 px-4 font-semibold rounded-r-full cursor-pointer">Search</button>
-  </div>
-
   <!-- body -->
-  <div class="h-screen w-5/6 fixed left-1/6 top-16 bg-slate-950 flex">
+  <div class="h-screen w-5/6 fixed left-1/6 top-16 bg-slate-100 flex">
 
-    <div class="pt-16 px-4 overflow-auto w-2/3 h-auto border-x-[0.5px] border-slate-700 text-slate-300">
+    <div class="px-4 overflow-auto w-2/3 h-auto border-x-[0.5px] border-slate-700 text-black">
       <h2 class="my-2">Order History</h2>
       <div class="w-full px-0 flex item-center overflow-auto space-x-2">
         <div class="h-48 w-72 shrink-0 rounded bg-slate-600 flex items-center justify-center"><span>Order #3433</span></div>
@@ -29,7 +22,7 @@
       </div>
     </div>
 
-    <div class="pt-20 overflow-auto w-1/3 h-auto text-slate-200 px-2">
+    <div class="overflow-auto w-1/3 h-auto text-black px-2">
 
       <!-- Customer Information -->
 
