@@ -43,6 +43,45 @@
       </div>
     </div>
     <div class="h-1"></div>
+    <!-- <DataTable
+      :rows="users"
+      :columns="['name', 'email', 'role']"
+      :actions="true"
+      :customSlots="['role']"
+      dataGroupName="User"
+      height="max-h-96"
+    >
+      <template #role="{ data }">
+        <span :class="data === 'Admin' ? 'text-red-600 font-bold' : 'text-gray-700'">
+          {{ data }}
+        </span>
+      </template>
+
+      <template #actions="{ row }">
+        <button @click="edit(row)" class="text-blue-500 hover:underline">Edit</button>
+      </template>
+
+      <template #pagination="{ currentPage, totalPages }">
+        <div class="flex justify-end space-x-2 items-center mt-2">
+          <button
+            @click="currentPage > 1 && (currentPage--)"
+            :disabled="currentPage === 1"
+            class="px-3 py-1 border rounded-md bg-gray-100 disabled:opacity-50"
+          >
+            Prev
+          </button>
+          <span>Page {{ currentPage }} of {{ totalPages }}</span>
+          <button
+            @click="currentPage < totalPages && (currentPage++)"
+            :disabled="currentPage === totalPages"
+            class="px-3 py-1 border rounded-md bg-gray-100 disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
+      </template>
+    </DataTable> -->
+
     <DataTable :rows="products" :columns="headers" dataGroupName="products" actions :custom-slots="['status']" height="h-[500px]">
       <template #status="{data}">
         <div v-if="data" class="flex items-center space-x-1">
