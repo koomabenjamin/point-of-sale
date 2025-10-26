@@ -1,77 +1,71 @@
 <template>
-  <button 
-    class="
-      border
-      flex
-      items-center
-      justify-center
-      rounded-full
-      h-10 w-10 p-1"
-    :class="`
-        text-lg
-        ${processedColor}
-      `"
-    >
-    <div>
+  <button
+    @click="$emit('click')"
+    class="border flex items-center justify-center rounded-md transition-all duration-200"
+    :class="[processedColor, sizeClass, { 'opacity-50 pointer-events-none': loader }]"
+  >
+    <div class="flex items-center gap-2">
       <Icon
+        v-if="loader"
         icon="svg-spinners:180-ring-with-bg"
         class="text-white"
         :width="iconSize"
-        v-if="loader" />
+      />
       <Icon
-        :icon="icon" 
+        v-else
+        :icon="icon"
         :width="iconSize"
-        v-else />
+      />
+      <span
+        v-if="label"
+        :class="[
+          dark ? 'text-white' : 'text-inherit',
+          size === 'sm' ? 'text-xs' :
+          size === 'md' ? 'text-sm' :
+          size === 'lg' ? 'text-base' : 'text-lg'
+        ]"
+      >
+        {{ label }}
+      </span>
     </div>
-    <span
-    :class="`
-        text-lg
-        ${(dark) ? 'text-white':''}
-        ${(size === 'sm') ? 'text-xs':''}
-        ${(size === 'md') ? 'text-sm':''}
-        ${(size === 'lg') ? 'text-sm':''}
-        ${(size === 'block') ? 'text-xl':''}
-      `">{{ label }}</span>
-
   </button>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Icon, type IconifyIcon } from "@iconify/vue";
+import { computed } from 'vue'
+import { Icon, type IconifyIcon } from "@iconify/vue"
 
 export interface ButtonProps {
-  type?: string,
-  size?: string,
-  label?: string | number,
-  icon: string | IconifyIcon;
-  iconSize?: string | number | undefined;
-  dark?: boolean,
-  loader?: boolean,
+  type?: 'success' | 'delete' | 'info' | 'edit' | 'normal'
+  size?: 'sm' | 'md' | 'lg' | 'block'
+  label?: string | number
+  icon: string | IconifyIcon
+  iconSize?: string | number
+  dark?: boolean
+  loader?: boolean
 }
 
-const props = defineProps<ButtonProps>();
+const props = defineProps<ButtonProps>()
+const emit = defineEmits(['click'])
 
 const processedColor = computed(() => {
-  if (props.type === 'success') {
-    return 'hover:text-green-500 text-green-400 text-white';
+  switch (props.type) {
+    case 'success': return 'bg-green-500 hover:bg-green-600 text-white'
+    case 'delete': return 'bg-rose-500 hover:bg-rose-600 text-white'
+    case 'info': return 'bg-indigo-500 hover:bg-indigo-600 text-white'
+    case 'edit': return 'bg-yellow-500 hover:bg-yellow-600 text-white'
+    case 'normal': return 'bg-blue-500 hover:bg-blue-600 text-white'
+    default: return 'bg-blue-500 hover:bg-blue-600 text-white'
   }
-  else if (props.type === 'delete') {
-    return 'hover:text-rose-600 text-rose-400 text-white';
-  }
-  else if (props.type === 'info') {
-    return 'hover:text-indigo-500 text-indigo-400 text-white';
-  }
-  else if (props.type === 'edit') {
-    return 'hover:text-yellow-400 text-yellow-400 text-white';
-  }
-  else if (props.type === 'normal') {
-    return 'hover:text-blue-500 text-blue-400 text-white';
-  }
-  return 'hover:text-blue-500 text-blue-400 text-white';
-});
+})
 
-
+const sizeClass = computed(() => {
+  switch (props.size) {
+    case 'sm': return 'h-8 px-3 text-xs'
+    case 'md': return 'h-10 px-4 text-sm'
+    case 'lg': return 'h-12 px-5 text-base'
+    case 'block': return 'w-full h-12 text-lg'
+    default: return 'h-10 px-4 text-sm'
+  }
+})
 </script>
-
-<style></style>

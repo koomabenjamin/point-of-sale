@@ -1,8 +1,12 @@
 import { defineStore } from 'pinia'
 
-export const useProductStore = defineStore('product', {
+export const useProductStore = defineStore('productStore', {
   state: () => ({
-    items: [],        // array of product objects
+    items: [
+      { id: 1, majorName: 'Product A', minorName: 'product', productCode: '3343', minorUnitOfMeasure: 'kg', majorUnitOfMeasure: 'lb', status: true, quantity: 10, productCategory: 'Category 1', produceLabel: 'Label A', creator: 'Admin', creationTime: '2024-06-01' },
+      { id: 2, majorName: 'Product B', minorName: 'product', productCode: '3343', minorUnitOfMeasure: 'kg', majorUnitOfMeasure: 'lb', status: true, quantity: 5, productCategory: 'Category 2', produceLabel: 'Label B', creator: 'Admin', creationTime: '2024-06-01' },
+      { id: 3, majorName: 'Product C', minorName: 'product', productCode: '3343', minorUnitOfMeasure: 'kg', majorUnitOfMeasure: 'lb', status: false, quantity: 20, productCategory: 'Category 1', produceLabel: 'Label C', creator: 'Admin', creationTime: '2024-06-01' },
+    ],        // array of product objects
     loading: false,
     error: null,
   }),
