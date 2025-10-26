@@ -12,9 +12,9 @@ export const useProductStore = defineStore('productStore', {
   }),
 
   getters: {
-    productCount: (state) => state.items.length,
-    byId: (state) => (id) => state.items.find(p => p.id === id) || null,
-    available: (state) => state.items.filter(p => (p.stock ?? 0) > 0),
+    productCount: (state) => state.products.length,
+    byId: (state) => (id) => state.products.find(p => p.id === id) || null,
+    available: (state) => state.products.filter(p => (p.stock ?? 0) > 0),
   },
 
   actions: {
@@ -33,8 +33,8 @@ export const useProductStore = defineStore('productStore', {
         const res = await fetch(endpoint)
         if (!res.ok) throw new Error(`Fetch failed: ${res.status}`)
         const data = await res.json()
-        this.items = Array.isArray(data) ? data : []
-        return this.items
+        this.products = Array.isArray(data) ? data : []
+        return this.products
       } catch (err) {
         this.error = err?.message || String(err)
         throw err
@@ -45,18 +45,18 @@ export const useProductStore = defineStore('productStore', {
 
     addProduct(product) {
       // expects product to already contain an id (or generate one before)
-      this.items.push(product)
+      this.products.push(product)
     },
 
     updateProduct(id, patch) {
-      const i = this.items.findIndex(p => p.id === id)
+      const i = this.products.findIndex(p => p.id === id)
       if (i === -1) return null
-      this.items[i] = { ...this.items[i], ...patch }
-      return this.items[i]
+      this.products[i] = { ...this.products[i], ...patch }
+      return this.products[i]
     },
 
     removeProduct(id) {
-      this.items = this.items.filter(p => p.id !== id)
+      this.products = this.products.filter(p => p.id !== id)
     },
 
     // Persist to backend (POST for create, PUT for update). Returns saved product.

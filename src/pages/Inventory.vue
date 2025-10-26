@@ -1,7 +1,10 @@
 <template>
 <MasterPage>
   <div class="fixed left-1/6 top-16 w-5/6 bottom-0 px-1 pt-1 bg-white text-black overflow-auto">
-    <div class="bg-blue-100 w-full text-xl rounded-md font-bold px-2 py-4">Product List</div>
+    <div class="bg-blue-100 w-full text-xl rounded-md font-bold px-2 py-2 flex items-center justify-between">
+      <div>Product List</div>
+      <Button label="Add Product" size="md" class="h-10" icon="icons8:plus" icon-size="30" />
+    </div>
     <div class="bg-blue-100 w-full h-20 px-2 rounded-md my-2 grid grid-cols-12 gap-2">
       <div class="flex items-center space-x-2 col-span-3 w-full">
         <FloatingLabelInput
@@ -40,7 +43,6 @@
           v-model="searchQuery"
           :dark="false"
         />
-        <Button label="Add" size="md" class="h-[60px]" icon="icons8:plus" icon-size="30" />
       </div>
     </div>
     <div class="h-1"></div>
@@ -88,7 +90,10 @@
 
     <hr class="my-2 border border-slate-200"/>
 
-    <div class="bg-blue-100 w-full text-xl rounded-md font-bold px-2 py-4 mt-2">SKU List</div>
+    <div class="bg-blue-100 w-full text-xl rounded-md font-bold px-2 py-2 flex items-center justify-between">
+      <div>SKU List</div>
+      <Button label="Add SKU" size="sm" class="h-10" icon="icons8:plus" icon-size="30" />
+    </div>
     <DataTable :rows="skus" :columns="skuHeaders" dataGroupName="SKU" actions :custom-slots="['status']" height="h-[30vh]">
       <template #status="{data}">
         <div v-if="data" class="flex items-center space-x-1">
@@ -132,6 +137,8 @@
     </DataTable>
   </div>
 </MasterPage>
+
+<AddProduct />
 </template>
 
 <script setup>
@@ -143,6 +150,8 @@ import DataTable from '../components/shared/DataTable.vue';
 import IconButton from '../components/shared/buttons/IconButton.vue';
 import Button from '../components/shared/buttons/Button.vue';
 import FloatingLabelInput from '../components/shared/inputs/FloatingLabelInput.vue';
+import AddProduct from '../components/modals/AddProduct.vue';
+import AddSKU from '../components/modals/AddSKU.vue';
 
 const action = () => alert('Action clicked!');
 
