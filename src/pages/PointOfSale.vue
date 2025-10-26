@@ -88,19 +88,10 @@
   </MasterPage>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 import MasterPage from '../components/shared/MasterPage.vue';
 
-export default {
-  setup() {
-    const message = ref('Welcome to the Dashboard!');
-
-    return {
-      message,
-    };
-  },
-};
 </script>
 
 <style scoped>
