@@ -63,7 +63,9 @@
                     >{{ description }}</span
                   >
                 </div>
-                <XCircleIcon
+                <Icon
+                  icon="mdi:close"
+                  icon-size="30"
                   class="
                     text-rose-600
                     h-8
@@ -102,9 +104,7 @@ import {
   DialogTitle,
   DialogPanel
 } from "@headlessui/vue";
-import {
-  XCircleIcon,
-} from "@heroicons/vue/24/outline";
+import { Icon } from "@iconify/vue";
 
 export interface SlideInModalProps{
   title?: string | undefined;

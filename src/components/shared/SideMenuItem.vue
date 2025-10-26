@@ -5,7 +5,7 @@
       <Icon :icon="icon" :width="iconSize" />
       <div class="font-normal text-sm capitalize" v-if="!minimize">{{ name }}</div>
     </div>
-    <Icon icon="mdi:chevron-right" width="30" />
+    <Icon icon="mdi:chevron-right" icon-size="30" />
   </RouterLink>
 </template>
 
