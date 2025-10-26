@@ -21,7 +21,7 @@
       <Icon
         :icon="icon" 
         :width="iconSize"
-        v-if="!loader" />
+        v-else />
     </div>
     <span
     :class="`

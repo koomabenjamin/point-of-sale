@@ -1,7 +1,59 @@
 <template>
 <MasterPage>
-  <div class="fixed left-1/6 top-16 w-5/6 bottom-0 px-4 bg-white text-black pt-20 overflow-auto">
-    <DataTable :rows="products" :columns="headers" dataGroupName="products" actions>
+  <div class="fixed left-1/6 top-16 w-5/6 bottom-0 px-1 pt-1 bg-white text-black overflow-auto">
+    <div class="bg-blue-100 w-full h-20 px-2 rounded-md my-2 grid grid-cols-12 gap-2">
+      <div class="flex items-center space-x-2 col-span-3 w-full">
+        <FloatingLabelInput
+          label="Search Inventory..."
+          type="date"
+          v-model="searchQuery"
+          :dark="false"
+        />
+
+        <span class="font-bold">To</span>
+
+        <FloatingLabelInput
+          label="Search Inventory..."
+          type="date"
+          v-model="searchQuery"
+          :dark="false"
+        />
+      </div>
+      <div class="flex items-center space-x-2 col-span-5 w-full">
+        <FloatingLabelInput
+          label="Enter (Purchase Order No./ Vendor Name..)"
+          type="text"
+          v-model="searchQuery"
+          :dark="false"
+          icon="meteor-icons:search"
+          icon-size="30"
+        />
+        <Button label="Search" size="md" class="h-[60px]" icon="icons8:search" icon-size="30" />
+      </div>
+      <div class="col-span-4 flex items-center">
+        <FloatingLabelInput
+          icon="stash:filter-light"
+          icon-size="35"
+          label="Clear"
+          type="text"
+          v-model="searchQuery"
+          :dark="false"
+        />
+        <Button label="Add" size="md" class="h-[60px]" icon="icons8:plus" icon-size="30" />
+      </div>
+    </div>
+    <div class="h-1"></div>
+    <DataTable :rows="products" :columns="headers" dataGroupName="products" actions :custom-slots="['status']" height="h-[500px]">
+      <template #status="{data}">
+        <div v-if="data" class="flex items-center space-x-1">
+          <div class="h-2 w-2 text-xs bg-green-800 rounded-full"></div>
+          <span>On Sale</span>
+        </div>
+        <div v-else class="flex items-center space-x-1">
+          <div class="h-2 w-2 text-xs bg-red-600 rounded-full"></div>
+          <span>Off Sale</span>
+        </div>
+      </template>
       <template #actions>
         <div class="flex space-x-2 items-center text-xs">
           <IconButton 
@@ -22,16 +74,24 @@ import { reactive, ref } from 'vue';
 import MasterPage from '../components/shared/MasterPage.vue';
 import DataTable from '../components/shared/DataTable.vue';
 import IconButton from '../components/shared/buttons/IconButton.vue';
+import Button from '../components/shared/buttons/Button.vue';
+import FloatingLabelInput from '../components/shared/inputs/FloatingLabelInput.vue';
 
 const action = () => alert('Action clicked!');
 
 const headers = ['majorName', 'minorName', 'productCode', 'minorUnitOfMeasure', 'majorUnitOfMeasure', 'status', 'quantity'];
 
 const products = reactive([
-  { id: 1, majorName: 'Product A', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:false, quantity: 10 },
+  { id: 1, majorName: 'Product A', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:true, quantity: 10 },
+  { id: 2, majorName: 'Product B', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:true, quantity: 5 },
+  { id: 3, majorName: 'Product C', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:false, quantity: 20 },
+  { id: 1, majorName: 'Product A', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:true, quantity: 10 },
   { id: 2, majorName: 'Product B', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:false, quantity: 5 },
   { id: 3, majorName: 'Product C', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:false, quantity: 20 },
-  { id: 1, majorName: 'Product A', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:false, quantity: 10 },
+  { id: 1, majorName: 'Product A', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:true, quantity: 10 },
+  { id: 2, majorName: 'Product B', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:true, quantity: 5 },
+  { id: 3, majorName: 'Product C', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:false, quantity: 20 },
+  { id: 1, majorName: 'Product A', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:true, quantity: 10 },
   { id: 2, majorName: 'Product B', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:false, quantity: 5 },
   { id: 3, majorName: 'Product C', minorName:'product', productCode:'3343', minorUnitOfMeasure:'kg', majorUnitOfMeasure:'lb', status:false, quantity: 20 },
 ]);

@@ -1,31 +1,31 @@
 <template>
-  <table class="w-full mt-4 overflow-auto">
+  <table :class="`w-full mt-2 overflow-auto ${props.height ? props.height : ''}`">
     <thead>
-      <tr class="border h-10">
+      <tr class="bg-blue-200 h-10">
         <th>#</th>
         <th
           v-for="column in columns"
           :key="column"
-          class="capitalize text-left text-xs whitespace-nowrap pl-2"
+          class="capitalize text-left text-sm whitespace-nowrap pl-2"
         >
           {{ removeSpecialCharacter(column) }}
         </th>
-        <th v-if="actions" class="capitalize text-left text-xs pl-2">Actions</th>
+        <th v-if="actions" class="capitalize text-left text-sm pl-2">Actions</th>
       </tr>
     </thead>
 
-    <tbody :class="{ border: rows.length > 0 }">
+    <tbody>
       <!-- <div v-if="rows.length > 0"> -->
         <tr
           v-for="(value, index) in rows"
           :key="index"
-          class="border-b"
+          :class="`${index % 2 === 0 ? 'bg-white' : 'bg-blue-100'}`"
         >
-          <td class="text-xs pl-2">{{ index + 1 }}.</td>
+          <td class="text-sm pl-2">{{ index + 1 }}.</td>
           <td
             v-for="column in columns"
             :key="column"
-            class="text-xs pl-2 pr-2 py-4"
+            class="text-sm pl-2 pr-2 py-4"
           >
             <div v-if="!customSlots.includes(column)">
               {{ value[column] ?? '—' }}
@@ -54,11 +54,11 @@
         <th
           v-for="column in columns"
           :key="column"
-          class="capitalize text-xs text-left h-10"
+          class="capitalize text-sm text-left h-10"
         >
           {{ removeSpecialCharacter(column) }}
         </th>
-        <th v-if="actions" class="capitalize text-left text-xs h-10">
+        <th v-if="actions" class="capitalize text-left text-sm h-10">
           Actions
         </th>
       </tr>
@@ -74,6 +74,7 @@ interface DataTableProps {
   actions?: boolean;
   dataGroupName?: string;
   customSlots?: string[];
+  height?: string;
 }
 
 const props = withDefaults(defineProps<DataTableProps>(), {
