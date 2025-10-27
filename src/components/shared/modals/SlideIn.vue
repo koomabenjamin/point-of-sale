@@ -10,10 +10,10 @@
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div class="fixed inset-0 bg-opacity-25" />
+        <div class="fixed inset-0 bg-opacity-25 bg-black opacity-45" />
       </TransitionChild>
 
-      <div class="fixed right-0 inset-0 bg-black bg-opacity-50 overflow-y-auto">
+      <div class="fixed right-0 inset-0 overflow-y-auto">
         <div
           class="flex min-h-full items-center justify-end text-center"
         >
@@ -65,7 +65,7 @@
                 </div>
                 <Icon
                   icon="mdi:close"
-                  icon-size="30"
+                  width="30"
                   class="
                     text-rose-600
                     h-8
@@ -84,7 +84,6 @@
                   @click="closeModal()"
                 />
               </DialogTitle>
-              <slot name="header"></slot>
               <slot name="body"></slot>
               <slot name="footer"></slot>
             </DialogPanel>

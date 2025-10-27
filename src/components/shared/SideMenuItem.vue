@@ -2,7 +2,7 @@
   <RouterLink :to="props.path"
     :class="`${sideBarItemClasses.base} ${isActive ? sideBarItemClasses.active : sideBarItemClasses.inactive}`">
     <div class="flex space-x-2 items-center">
-      <Icon :icon="icon" :width="iconSize" />
+      <Icon :icon="icon" :width="25" />
       <div class="font-normal text-sm capitalize" v-if="!minimize">{{ name }}</div>
     </div>
     <Icon icon="mdi:chevron-right" icon-size="30" />
@@ -30,7 +30,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'click'): void;
-  (e: 'updateActiveBoard', name: string): void;
+  // (e: 'updateActiveBoard', name: string): void;
 }>();
 
 const isActive = ref(props.isActive ?? false);

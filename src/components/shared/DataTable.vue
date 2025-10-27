@@ -47,7 +47,7 @@
             </td>
 
             <td v-if="actions" class="pl-2">
-              <slot name="actions" :row="row" />
+              <slot name="actions" :data="row[column]" :row="row"></slot>
             </td>
           </tr>
 

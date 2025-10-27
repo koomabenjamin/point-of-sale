@@ -9,9 +9,6 @@
         :name="item.name"
         :icon="item.icon"
         :path="item.path"
-        :minimize="minimize"
-        :is-active="activeBoard === item.path"
-        @updateActiveBoard="updateActiveBoard"
       />
     </div>
 
@@ -22,9 +19,6 @@
         :name="item.name"
         :icon="item.icon"
         :path="item.path"
-        :minimize="minimize"
-        :is-active="activeBoard === item.path"
-        @updateActiveBoard="updateActiveBoard"
       />
     </div>
   </div>

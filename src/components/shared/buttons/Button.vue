@@ -7,6 +7,7 @@
       flex
       items-center
       justify-center
+      cursor-pointer
       rounded-md
       space-x-2"
     :class="`
@@ -17,7 +18,6 @@
         ${(size === 'md') ? 'px-3 py-2':''}
         ${(size === 'lg') ? 'px-5 py-2':''}
         ${(size === 'block') ? 'w-full py-3':''}
-
         ${(loader) ? 'bg-blue-800 text-white': 'text-blue-500'}
       `"
     >

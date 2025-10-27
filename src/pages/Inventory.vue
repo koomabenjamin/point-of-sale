@@ -1,14 +1,16 @@
 <template>
 <MasterPage>
-  <div class="fixed left-1/6 top-16 w-5/6 bottom-0 px-1 pt-1 bg-white text-black overflow-auto">
+  <div class="fixed left-1/6 top-16 w-5/6 bottom-0 px-1 py-1 bg-white text-black overflow-auto">
+    <!-- <div class="bg-slate-100 shadow"></div> -->
     <div class="bg-blue-100 w-full text-xl rounded-md font-bold px-2 py-2 flex items-center justify-between">
       <div>Product List</div>
-      <Button label="Add Product" size="md" class="h-10" icon="icons8:plus" icon-size="30" />
+      <Button label="Add Product" size="md" class="h-10" icon="icons8:plus" icon-size="30" @click="showProductModal()" />
     </div>
-    <div class="bg-blue-100 w-full h-20 px-2 rounded-md my-2 grid grid-cols-12 gap-2">
+    <div class="bg-blue-100 w-full h-12 px-1 rounded-md my-1 grid grid-cols-12 gap-2">
       <div class="flex items-center space-x-2 col-span-3 w-full">
         <FloatingLabelInput
           label="Search Inventory..."
+          icon=""
           type="date"
           v-model="searchQuery"
           :dark="false"
@@ -17,6 +19,7 @@
         <span class="font-bold">To</span>
 
         <FloatingLabelInput
+          icon=""
           label="Search Inventory..."
           type="date"
           v-model="searchQuery"
@@ -32,7 +35,7 @@
           icon="meteor-icons:search"
           icon-size="30"
         />
-        <Button label="Search" size="md" class="h-[60px]" icon="icons8:search" icon-size="30" />
+        <Button label="Search" size="md" class="h-10" icon="icons8:search" icon-size="30" />
       </div>
       <div class="col-span-4 flex items-center">
         <FloatingLabelInput
@@ -57,10 +60,10 @@
           <span>Off Sale</span>
         </div>
       </template>
-      <template #actions>
+      <template #actions="{ row }">
         <div class="flex space-x-2 items-center text-xs">
           <IconButton 
-          @click="action()" label="Edit" size="sm" :icon-size="18" type="edit" :loader="false" icon="material-symbols:ink-pen-outline" />
+          @click="setProductToEdit(row)" label="Edit" size="sm" :icon-size="18" type="edit" :loader="false" icon="material-symbols:ink-pen-outline" />
           <IconButton 
           @click="action()" label="Delete" size="sm" :icon-size="18" type="delete" :loader="false" icon="material-symbols:delete-outline-rounded" />
           <IconButton 
@@ -92,7 +95,7 @@
 
     <div class="bg-blue-100 w-full text-xl rounded-md font-bold px-2 py-2 flex items-center justify-between">
       <div>SKU List</div>
-      <Button label="Add SKU" size="sm" class="h-10" icon="icons8:plus" icon-size="30" />
+      <Button label="Add SKU" size="sm" class="h-10" icon="icons8:plus" icon-size="30" @click="showSKUModal()" />
     </div>
     <DataTable :rows="skus" :columns="skuHeaders" dataGroupName="SKU" actions :custom-slots="['status']" height="h-[30vh]">
       <template #status="{data}">
@@ -138,10 +141,17 @@
   </div>
 </MasterPage>
 
-<AddProduct />
+<AddProduct 
+  :product-to-edit="productToEdit" 
+  :isModalOpen="isProductModalOpen" 
+  @close="showProductModal()"
+  :action="productActionToApply"/>
+<AddSKU :isModalOpen="isSKUModalOpen" @close="showSKUModal()"/>
+
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '../pinia/product-store';
 import { useSKUStore } from '../pinia/sku-store';
@@ -149,11 +159,30 @@ import MasterPage from '../components/shared/MasterPage.vue';
 import DataTable from '../components/shared/DataTable.vue';
 import IconButton from '../components/shared/buttons/IconButton.vue';
 import Button from '../components/shared/buttons/Button.vue';
-import FloatingLabelInput from '../components/shared/inputs/FloatingLabelInput.vue';
+import FloatingLabelInput from '../components/shared/inputs/Input.vue';
 import AddProduct from '../components/modals/AddProduct.vue';
 import AddSKU from '../components/modals/AddSKU.vue';
 
 const action = () => alert('Action clicked!');
+
+const searchQuery = ref('');
+
+const productActionToApply = ref('add');
+
+const productToEdit = ref(null);
+// const skuToEdit = ref(null);
+
+const setProductToEdit = (product) => {
+  productActionToApply.value = 'edit';
+  productToEdit.value = product;
+  isProductModalOpen.value = true;
+}
+
+const isProductModalOpen = ref(false);
+const isSKUModalOpen = ref(false);
+
+const showProductModal = () => isProductModalOpen.value = !isProductModalOpen.value;
+const showSKUModal = () => isSKUModalOpen.value = !isSKUModalOpen.value;
 
 const productStore = useProductStore();
 const skuStore = useSKUStore();

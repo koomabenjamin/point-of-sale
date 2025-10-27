@@ -5,24 +5,24 @@
     </div>
     <input :id=props.id :disabled="props.disabled" :placeholder="props.label" :type="props.type" autocomplete="off"
       @input="updateValue($event)" :class="`
-         peer
-         w-full
-         p-2
-         text-sm
-         pt-2 
-         font-light 
-         bg-white 
-         border
-         h-10
-         rounded-md
-         outline-none
-         transition
-         disabled:opacity-70
-         disabled:cursor-not-allowed
-         ${props.price ? 'pl-9' : 'pl-4'}
-               ${props.errors ? 'border-rose-500' : 'border-neutral-300'}
-               ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}
-       `" />
+        peer
+        w-full
+        p-2
+        text-sm
+        pt-2 
+        font-light 
+        bg-white 
+        border
+        h-10
+        rounded-md
+        outline-none
+        transition
+        disabled:opacity-70
+        disabled:cursor-not-allowed
+        ${props.price ? 'pl-9' : 'pl-4'}
+        ${props.errors ? 'border-rose-500' : 'border-neutral-300'}
+        ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}
+      `" />
     <!-- <label 
        :class="`
          absolute 
