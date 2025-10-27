@@ -26,12 +26,12 @@
             :key="`${index}-${currentPage}`"
             :class="index % 2 === 0 ? 'bg-white' : 'bg-blue-100'"
           >
-            <td class="text-sm pl-2">{{ startIndex + index + 1 }}.</td>
+            <td class="text-xs pl-2">{{ startIndex + index + 1 }}.</td>
 
             <td
               v-for="column in columns"
               :key="`${index}-${column}`"
-              class="text-sm pl-2 pr-2 py-4 whitespace-nowrap"
+              class="text-xs pl-2 pr-2 py-3 whitespace-nowrap"
             >
               <template v-if="!customSlots.includes(column)">
                 {{ row[column] ?? '—' }}

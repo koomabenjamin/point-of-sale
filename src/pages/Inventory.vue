@@ -65,9 +65,9 @@
           <IconButton 
           @click="setProductToEdit(row)" label="Edit" size="sm" :icon-size="18" type="edit" :loader="false" icon="material-symbols:ink-pen-outline" />
           <IconButton 
-          @click="action()" label="Delete" size="sm" :icon-size="18" type="delete" :loader="false" icon="material-symbols:delete-outline-rounded" />
+          @click="productStore.removeProduct(row.id)" label="Delete" size="sm" :icon-size="18" type="delete" :loader="false" icon="material-symbols:delete-outline-rounded" />
           <IconButton 
-          @click="action()" label="Detail" size="sm" :icon-size="18" type="info" :loader="false" icon="material-symbols:info-outline" />
+          @click="setProductToView(row)" label="Detail" size="sm" :icon-size="18" type="info" :loader="false" icon="material-symbols:info-outline" />
         </div>
       </template>
       <template #pagination="{ currentPage, totalPages }">
@@ -174,6 +174,12 @@ const productToEdit = ref(null);
 
 const setProductToEdit = (product) => {
   productActionToApply.value = 'edit';
+  productToEdit.value = product;
+  isProductModalOpen.value = true;
+}
+
+const setProductToView = (product) => {
+  productActionToApply.value = 'view';
   productToEdit.value = product;
   isProductModalOpen.value = true;
 }

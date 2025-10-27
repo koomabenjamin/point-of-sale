@@ -93,6 +93,7 @@ import { reactive, watch } from 'vue'
 import { useProductStore } from '../../pinia/product-store'
 import SlideIn from "../shared/modals/SlideIn.vue"
 import Button from "../shared/buttons/Button.vue"
+import { v4 as uuidv4 } from 'uuid'; 
 
 const props = defineProps({
   action: {
@@ -128,12 +129,13 @@ const actionToPerform = () => {
   if (props.action === 'add') {
     productStore.addProduct(form);
   } else if (props.action === 'edit') {
-    productStore.updateProduct(form);
+    productStore.updateProduct(form.id, form);
   }
   closeModal();
 };
 
 const form = reactive({
+  id: uuidv4(),
   majorName: '',
   minorName: '',
   productCode: '',
@@ -148,6 +150,7 @@ const form = reactive({
 });
 
 watch(() => props.productToEdit, (newVal) => {
+  form.id = newVal?.id ?? '';
   form.majorName = newVal?.majorName ?? '';
   form.minorName = newVal?.minorName ?? '';
   form.productCode = newVal?.productCode ?? '';

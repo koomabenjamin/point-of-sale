@@ -61,7 +61,8 @@
     </template>
     <template #footer>
       <div class="mt-4 flex items-center">
-        <Button class="bg-blue-500 text-white px-4 py-2 rounded mr-2" label="Add SKU"></Button>
+        <Button v-if="action === 'add'" icon="" class="bg-blue-500 text-white px-4 py-2 rounded mr-2" label="Add SKU"></Button>
+          <Button v-if="action === 'edit'" icon="" class="bg-yellow-500 text-white px-4 py-2 rounded mr-2" label="Update SKU"></Button>
         <Button class="bg-gray-300 text-black px-4 py-2 rounded" label="Cancel"></Button>
       </div>
     </template>
@@ -89,6 +90,15 @@ const formData = reactive({
 });
 
 const props = defineProps({
+  action: {
+    type: String,
+    default: 'add' // or 'edit'
+  },
+  productToEdit: {
+    type: Object,
+    default: null,
+    required: false
+  },
   isModalOpen: {
     type: Boolean,
     required: true
