@@ -5,7 +5,7 @@
     description="Create a new product for the store/warehouse..."
     @close="closeModal()">
     <template #body>
-      <form class="space-y-4" @submit.prevent="saveSKU()">
+      <!-- <form class="space-y-4"> -->
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700">Major Name</label>
@@ -13,15 +13,17 @@
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Spec Code</label>
-            <input type="text" required v-model="formData.specCode" class="w-full border rounded px-3 py-2">
+            <!-- <input type="text" required v-model="formData.specCode" class="w-full border rounded px-3 py-2"> -->
+             <v-select :options="specGroups" v-model="formData.specCode" label="optionsText"></v-select>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">SKU Barcode</label>
             <input type="text" required v-model="formData.skuBarCode" class="w-full border rounded px-3 py-2">
+            <button class="" @click.prevent="generatesKU()">Generate SKU</button>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Unit</label>
-            <input type="text" required v-model="formData.unit" class="w-full border rounded px-3 py-2">
+            <v-select :options="unitGroups" v-model="formData.unit" label="optionsText"></v-select>
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Cost Price</label>
@@ -55,7 +57,7 @@
             <input type="datetime-local" required v-model="formData.creationTime" class="w-full border rounded px-3 py-2">
           </div>
         </div>
-      </form>
+      <!-- </form> -->
     </template>
     <template #footer>
       <div class="mt-4 flex items-center">
@@ -67,9 +69,10 @@
 </template>
 
 <script setup>
-import { reactive } from "vue"
+import { ref, reactive } from "vue"
 import SlideIn from "../shared/modals/SlideIn.vue"
 import Button from "../shared/buttons/Button.vue"
+import { generateSKUs } from '../../utils/cartesian.js';
 
 const formData = reactive({
   majorName: '',
@@ -103,6 +106,13 @@ const props = defineProps({
 const emit = defineEmits(['close'])
 
 const closeModal = () => emit('close');
+
+const specGroups = ref([{ name: 'Color', optionsText: 'Red,Blue', options: ['Red','Blue'] }]);
+const unitGroups = ref([{ name: 'Unit', optionsText: 'kg,box', options: ['kg', 'box'] }]);
+
+const generatesKU = () => {
+  formData.skuBarCode = generateSKUs(formData.specCode, formData.unit, { price: formData.price, stock: formData.stock, skuPrefix: 'PRD' });
+}
 </script>
 
 <style scoped></style>

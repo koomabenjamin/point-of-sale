@@ -31,7 +31,7 @@
             <td
               v-for="column in columns"
               :key="`${index}-${column}`"
-              class="text-sm pl-2 pr-2 py-4"
+              class="text-sm pl-2 pr-2 py-4 whitespace-nowrap"
             >
               <template v-if="!customSlots.includes(column)">
                 {{ row[column] ?? '—' }}
@@ -47,7 +47,7 @@
             </td>
 
             <td v-if="actions" class="pl-2">
-              <slot name="actions" :data="row[column]" :row="row"></slot>
+              <slot name="actions" :row="row"></slot>
             </td>
           </tr>
 
