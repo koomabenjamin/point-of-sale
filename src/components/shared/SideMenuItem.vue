@@ -14,7 +14,7 @@ import { defineProps, defineEmits, ref } from 'vue';
 import { Icon, type IconifyIcon } from "@iconify/vue";
 
 const sideBarItemClasses = {
-  base: 'flex items-center justify-between w-full p-2 hover:bg-slate-100 hover:shadow hover:scale-105 transition-all duration-200 ease-in-out',
+  base: 'flex items-center justify-between w-full p-2 hover:bg-blue-200 hover:shadow hover:scale-105 transition-all duration-200 ease-in-out',
   active: 'bg-blue-600 text-white hover:text-blue-500',
   inactive: 'text-gray-700 hover:text-gray-900',
 };
