@@ -6,17 +6,17 @@
     <div class="px-4 overflow-auto w-2/3 h-auto border-x-[0.5px] border-slate-700 text-black">
       <h2 class="my-2">Order History</h2>
       <div class="w-full px-0 flex item-center overflow-auto space-x-2">
-        <div class="h-48 w-72 shrink-0 rounded bg-slate-600 flex items-center justify-center"><span>Order #3433</span></div>
-        <div class="h-48 w-72 shrink-0 rounded bg-slate-600 flex items-center justify-center"><span>Order #3440</span></div>
-        <div class="h-48 w-72 shrink-0 rounded bg-slate-600 flex items-center justify-center"><span>Order #3450</span></div>
-        <div class="h-48 w-72 shrink-0 rounded bg-slate-600 flex items-center justify-center"><span>Order #3451</span></div>
-        <div class="h-48 w-72 shrink-0 rounded bg-slate-600 flex items-center justify-center"><span>Order #3445</span></div>
-        <div class="h-48 w-72 shrink-0 rounded bg-slate-600 flex items-center justify-center"><span>Order #3490</span></div>
+        <div class="h-48 w-72 shrink-0 rounded bg-blue-600 text-white flex items-center justify-center"><span>Order #3433</span></div>
+        <div class="h-48 w-72 shrink-0 rounded bg-blue-600 text-white flex items-center justify-center"><span>Order #3440</span></div>
+        <div class="h-48 w-72 shrink-0 rounded bg-blue-600 text-white flex items-center justify-center"><span>Order #3450</span></div>
+        <div class="h-48 w-72 shrink-0 rounded bg-blue-600 text-white flex items-center justify-center"><span>Order #3451</span></div>
+        <div class="h-48 w-72 shrink-0 rounded bg-blue-600 text-white flex items-center justify-center"><span>Order #3445</span></div>
+        <div class="h-48 w-72 shrink-0 rounded bg-blue-600 text-white flex items-center justify-center"><span>Order #3490</span></div>
       </div>
 
       <h2 class="my-2">Products / Item Listing</h2>
       <div class="grid grid-cols-5 gap-2 overflow-auto h-[80vh]">
-        <div class="h-36 bg-blue-500 rounded flex items-center justify-center font-bold" v-for="i in 50" :key="i">
+        <div class="h-36 bg-blue-500 rounded flex items-center justify-center font-bold text-white" v-for="i in 50" :key="i">
           <span>Product {{ i }}</span>
         </div>
       </div>
@@ -39,7 +39,7 @@
       </ul>
 
       <!-- Payment Summary -->
-      <div class="mt-4 border border-slate-800 rounded space-y-4">
+      <div class="mt-4 shadow-sm rounded-md space-y-2 font-semibold p-2 text-black">
         <div class="flex items-center justify-between text-2xl">
           <span>Subtotal:</span>
           <span>50,000ugx</span>
@@ -56,7 +56,7 @@
           <span>Loyalty Points:</span>
           <span>500</span>
         </div>
-        <div class="flex items-center justify-between text-3xl">
+        <div class="flex items-center justify-between text-3xl font-bold">
           <span>Total:</span>
           <span>45,600 UGX</span>
         </div>
